@@ -1,20 +1,38 @@
 # setup.py
 
 from setuptools import setup, find_packages
+import sys
 
-README = ""
+assert sys.version_info >= (3, 6, 0), "makebook requires Python 3.6+"
+from pathlib import Path  # noqa E402
+
+CURRENT_DIR = Path(__file__).parent
+
+
+def get_readme() -> str:
+    """
+    a function to pull the long description from the README.md file
+    """
+    readme_md = CURRENT_DIR / "README.md"
+    with open(readme_md, encoding="utf8") as ld_file:
+        return ld_file.read()
+
+
+README = get_readme()
 CHANGELOG = ""
-description = u'\n'.join([README, CHANGELOG])
+description = "\n".join([README, CHANGELOG])
 
 setup(
     name="makebook",
     version="2018.05.30",
-    url='https://github.com/ProfessorKazarinoff/makebook',
-    author = "Peter Kazarinoff",
-    maintainer = "Peter Kazarinoff",
-    description = 'A package to convert directories of notebooks into a book',
+    url="https://github.com/ProfessorKazarinoff/makebook",
+    author="Peter Kazarinoff",
+    maintainer="Peter Kazarinoff",
+    description="A package to convert directories of notebooks into a book",
     long_description=description,
-    license='GNU General Public License v3.0',
+    long_description_content_type="text/markdown",
+    license="GNU General Public License v3.0",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
+    python_requires=">=3.6",
 )
