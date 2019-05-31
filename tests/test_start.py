@@ -1,6 +1,6 @@
 # test_start.py
 
-from makebook import mb, copy_all_images_to_dir
+from makebook import copy_all_images_to_dir
 
 
 def test_always_pass():

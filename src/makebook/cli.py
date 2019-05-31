@@ -21,7 +21,7 @@ def cli_main(generate_config, version, ask_help):
     The configuration file can be modified and be used to build the book
     """
     if generate_config:
-        click.echo("Generating config file ...")
+        click.echo("Generating config file...")
         click.echo("Creating a file called makebook-config.py")
     elif ask_help:
         click.echo("Working on calling the help function and show help")

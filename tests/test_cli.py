@@ -1,11 +1,8 @@
 # test_cli.py
 
-from makebook import cli_main
-from subprocess import check_output
-import sys
-
 import click
 from click.testing import CliRunner
+from makebook import cli_main
 
 
 def test_cli_main():
@@ -15,5 +12,17 @@ def test_cli_main():
     assert "Welcome to makebook!" in result.output
 
 
+def test_cli_version():
+    runner = CliRunner()
+    command_list = ["--version", "-v"]
+    for command in command_list:
+        result = runner.invoke(cli_main, [command])
+        assert "2019" in result.output
+
+
 def test_cli_generate_config():
-    assert False
+    runner = CliRunner()
+    command_list = ["--generate-config", "-g"]
+    for command in command_list:
+        result = runner.invoke(cli_main, [command])
+        assert "Generating config file" in result.output
