@@ -110,6 +110,7 @@ site/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.vscode/
 
 ## pip-wheel-metadata
 pip-wheel-metadata/

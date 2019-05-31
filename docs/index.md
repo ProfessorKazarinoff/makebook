@@ -4,7 +4,7 @@ Makebook is a Python project that makes books from Jupyter notebooks and markdow
 
 ## Installation
 
-```
+```text
 git clone https://github.com/ProfessorKazarinoff/makebook.git
 cd makebook.git
 python -m venv venv
