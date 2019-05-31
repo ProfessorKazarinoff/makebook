@@ -1,0 +1,24 @@
+site_name: Makebook Docs
+site_url: https://makebook.readthedocs.io
+site_description: Documentation for the makebook package.
+site_author: Peter Kazarinoff
+
+repo_url: https://github.com/ProfessorKazarinoff/makebook/
+edit_uri: ""
+
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - yaml
+        - django
+
+nav:
+    - Home: index.md
+
+
+
+copyright: Copyright &copy; 2019 <a href="https://twitter.com/pkazarinoff">Peter Kazarinoff</a>
+
+plugins:
+    - search

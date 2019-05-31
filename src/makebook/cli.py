@@ -4,8 +4,8 @@ import click
 from .utils import get_version
 
 config_help = "Creates a makebook config file called makebook-config.py"
-version_help = "Prints out the makebook version number"
-help_help = "Show makebook cli options"
+version_help = "Prints out the makebook version number."
+help_help = "Show this message and exit."
 
 
 @click.command()
@@ -16,11 +16,13 @@ help_help = "Show makebook cli options"
 @click.option("-h", "ask_help", help=help_help, is_flag=True)
 def cli_main(generate_config, version, ask_help):
     """
-    Example script.
+    Makebook is a Python package used to create books from Jupyter Notebook files.
+    There is a command-line interface to generate a configuration file.
+    The configuration file can be modified and be used to build the book
     """
     if generate_config:
-        click.echo("generating config doc")
-        click.echo("creating a file called makebook-config.py")
+        click.echo("Generating config file ...")
+        click.echo("Creating a file called makebook-config.py")
     elif ask_help:
         click.echo("Working on calling the help function and show help")
     elif version:
@@ -35,12 +37,9 @@ def cli_main(generate_config, version, ask_help):
         )
 
 
-# make a command that generates the config file
-# > makebook --generate-config
-
-# make a command option that includes > makebook build--config-file or -c
+# make a command option that includes > makebook build --config-file or -c
 # make a command > makebook build --source-dir or -s
-# make a command > makebook build --out-dir or -o
+# make a command > makebook build --outfile or -o
 
 # def cli_main():
 #    main()
