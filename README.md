@@ -1,4 +1,6 @@
-# Welcome to the Makebook Documentation (!! Under Construction !! Not Ready for Use !!)
+# !! Under Construction !! Not Ready for Use !!
+
+# Welcome to the Makebook Documentation 
  
 Makebook is a Python project that makes books from Jupyter notebooks and markdown files.
 
