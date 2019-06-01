@@ -1,5 +1,10 @@
 # images.py
 
+import os
+import re
+import sys
+import shutil
+
 
 def copy_all_images_to_dir(notebook_dir_name="notebooks", images_dir="images"):
     """
@@ -21,7 +26,6 @@ def copy_all_images_to_dir(notebook_dir_name="notebooks", images_dir="images"):
         if REG_nb_dir.match(dir):
             if os.path.exists(os.path.join(nb_dir, dir, "images")):
                 scr_dir = os.path.join(nb_dir, dir, "images")
-                dst_dir = images_dir
                 for f in os.listdir(scr_dir):
                     try:
                         shutil.copy(

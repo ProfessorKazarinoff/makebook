@@ -2,6 +2,8 @@
 
 import click
 from .utils import get_version
+from .commands import write_config
+import os
 
 config_help = "Creates a makebook config file called makebook-config.py"
 version_help = "Prints out the makebook version number."
@@ -23,6 +25,8 @@ def cli_main(generate_config, version, ask_help):
     if generate_config:
         click.echo("Generating config file...")
         click.echo("Creating a file called makebook-config.py")
+        config_dir = os.getcwd()
+        write_config(config_dir)
     elif ask_help:
         click.echo("Working on calling the help function and show help")
     elif version:
