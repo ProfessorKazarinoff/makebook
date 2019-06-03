@@ -24,7 +24,7 @@ description = "\n".join([README, CHANGELOG])
 
 setup(
     name="makebook",
-    version="2018.05.31",
+    version="2019.06.02",
     url="https://github.com/ProfessorKazarinoff/makebook",
     author="Peter Kazarinoff",
     maintainer="Peter Kazarinoff",
