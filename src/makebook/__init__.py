@@ -3,3 +3,4 @@ from makebook.images import *
 from makebook.cli import *
 from makebook.utils import *
 from makebook.commands import *
+from makebook.writers import *
