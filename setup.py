@@ -3,6 +3,7 @@
 from setuptools import setup, find_packages
 import sys
 
+
 assert sys.version_info >= (3, 6, 0), "makebook requires Python 3.6+"
 from pathlib import Path
 
@@ -21,10 +22,11 @@ def get_readme() -> str:
 README = get_readme()
 CHANGELOG = ""
 description = "\n".join([README, CHANGELOG])
+VERSION = "2019.06.04"
 
 setup(
     name="makebook",
-    version="2019.06.02",
+    version=VERSION,
     url="https://github.com/ProfessorKazarinoff/makebook",
     author="Peter Kazarinoff",
     maintainer="Peter Kazarinoff",

@@ -22,10 +22,10 @@ Makebook offers the following cli commands
 | command | output |
 | --- | --- |
 | ```makebook``` | prints welcome message |
-| ```makebook -h or --help``` | prints Makebook command line options |
+| ```makebook --help``` | prints Makebook command line options |
 | ```makebook -v or --version``` | prints the date-based version number |
 | ```makebook -g or --generate-config``` | create a ```makebook-config.py``` configuration file |
-| ```makebook -b or --build | build a book out of Jupyter notebooks |
+| ```makebook build``` | build a book out of Jupyter notebooks |
 
 ## Project layout
 
