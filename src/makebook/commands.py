@@ -28,7 +28,3 @@ OUT_IMAGES_DIR = ""
 def write_config(base_dir):
     config_path = os.path.join(base_dir, "makebook-config.py")
     io.open(config_path, "w", encoding="utf-8").write(config_text)
-
-
-def build_tex():
-    pass

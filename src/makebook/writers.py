@@ -80,12 +80,8 @@ def export_tex(
     mypreprocessor = (
         RegexRemovePreprocessor()
     )  # Create an instance of the RegexRemovePreprocessor
-    mypreprocessor.patterns = [
-        "\s*\Z"
-    ]  # supply a re pattern (in a list) to the preprocessor's .patterns attribute
-    exporter.register_preprocessor(
-        mypreprocessor, enabled=True
-    )  # apply the preprocessor to the exporter
+    mypreprocessor.patterns = ["\s*\Z"]  # supply a re pattern (in a list) to the preprocessor's .patterns attribute
+    exporter.register_preprocessor(mypreprocessor, enabled=True)  # apply the preprocessor to the exporter
     writer = FilesWriter(build_directory=str(output_file.parent))
     output, resources = exporter.from_notebook_node(combined_nb, resources)
     writer.write(output, resources, notebook_name=output_file.stem)
