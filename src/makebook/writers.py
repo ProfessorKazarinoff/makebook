@@ -5,6 +5,11 @@ import os
 import re
 from pathlib import Path
 import sys
+from nbconvert import LatexExporter, NotebookExporter, HTMLExporter, PDFExporter
+from nbconvert.preprocessors import RegexRemovePreprocessor
+from nbconvert.writers import FilesWriter
+from nbformat import NotebookNode
+from .utils import convert_links
 
 
 def copy_all_images_to_dir(notebooks_dir_path=None, out_dir_path=None):
@@ -46,8 +51,41 @@ def copy_all_images_to_dir(notebooks_dir_path=None, out_dir_path=None):
                         exit(1)
 
 
-def export_nbnode():
+class MyLatexExporter(LatexExporter):
+    def default_filters(self):
+        yield from super().default_filters()
+        yield ("resolve_references", convert_links)
+
+
+class MyLatexPDFExporter(PDFExporter):
+    def default_filters(self):
+        yield from super().default_filters()
+        yield ("resolve_references", convert_links)
+
+
+def export_tex(
+    combined_nb: NotebookNode, output_file: Path, pdf=False, template_file=None
+):
     """
-    a function that takes in a notebook node object and exports a .tex file or other file format
+    A function that exports a .tex file from a notebook node object
     """
-    pass
+    resources = {}
+    resources["unique_key"] = "combined"
+    resources["output_files_dir"] = "combined_files"
+
+    # log.info('Converting to %s', 'pdf' if pdf else 'latex')
+    exporter = MyLatexPDFExporter() if pdf else MyLatexExporter()
+    if template_file is not None:
+        exporter.template_file = str(template_file)
+    mypreprocessor = (
+        RegexRemovePreprocessor()
+    )  # Create an instance of the RegexRemovePreprocessor
+    mypreprocessor.patterns = [
+        "\s*\Z"
+    ]  # supply a re pattern (in a list) to the preprocessor's .patterns attribute
+    exporter.register_preprocessor(
+        mypreprocessor, enabled=True
+    )  # apply the preprocessor to the exporter
+    writer = FilesWriter(build_directory=str(output_file.parent))
+    output, resources = exporter.from_notebook_node(combined_nb, resources)
+    writer.write(output, resources, notebook_name=output_file.stem)
