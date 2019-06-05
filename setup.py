@@ -38,6 +38,6 @@ setup(
     install_requires=["Click"],
     entry_points="""
         [console_scripts]
-        makebook=makebook:cli_main
+        makebook=makebook.cli:cli
     """,
 )
