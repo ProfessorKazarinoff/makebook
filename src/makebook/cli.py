@@ -76,7 +76,7 @@ def build(ctx):
     out_dir = Path(Path.cwd(), "out")
     click.echo(f"source directry: {source_dir}")
     click.echo(f"output directory: {out_dir}")
-    # build_tex()
+    build_tex()
 
 
 if __name__ == "__main__":

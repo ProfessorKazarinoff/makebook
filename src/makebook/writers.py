@@ -14,6 +14,8 @@ def copy_all_images_to_dir(notebooks_dir_path=None, out_dir_path=None):
     """
     if not notebooks_dir_path:
         notebooks_dir_path = Path(Path.cwd(), "notebooks")
+        if not notebooks_dir_path.exists():
+            notebooks_dir_path.mkdir()
     if not out_dir_path:
         out_dir_path = Path(Path.cwd(), "out")
     REG_nb_dir = re.compile((r"(\d\d)-*"))
