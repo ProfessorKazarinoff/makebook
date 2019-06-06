@@ -123,3 +123,14 @@ makebook-config.py
 
 notebooks/
 out/
+
+## anything that LaTeX compilers spit out
+
+.tex
+.aux
+.log
+.out
+.pdf
+.synctex.gz
+.gz
+.toc

@@ -66,6 +66,7 @@ def cli(ctx):
 
 
 build_help = "Run the build tool to convert a directory of notebooks to a .tex file"
+source_directory_help = "The directory that contains the source notebooks"
 
 
 @cli.command(help=build_help)
@@ -76,7 +77,7 @@ def build(ctx):
     out_dir = Path(Path.cwd(), "out")
     click.echo(f"source directry: {source_dir}")
     click.echo(f"output directory: {out_dir}")
-    build_tex()
+    build_tex()  # args(input_dir=None, output_dir=None, output_file_stem=None, template_file_path=)
 
 
 if __name__ == "__main__":
