@@ -58,6 +58,18 @@ version_help = "Prints out the makebook version number."
     expose_value=False,
     is_eager=True,
 )
+# @click.argument('-s','--source','source',
+#     help="source directory",
+#     required = False,
+#     type=click.Path(exists=True))
+# options to include:
+# -c --config config file path
+# -s --source source dir path
+# -o --output output dir path
+# -t --template template file path
+# -n --name file name of output file
+# -i --include list of file paths to include in the output dir
+# -e --exclude list of file paths to exclude from the source dir
 # @click.argument(
 #     "src",
 #     nargs=-1,
@@ -75,10 +87,14 @@ version_help = "Prints out the makebook version number."
 #     callback=read_pyproject_toml,
 #     help="use specified configuration file",
 # )
+#@click.option('--debug/--no-debug', default=False, required=False, help="debug on or off")
+#@click.argument('-s','--source','source', default=None, required=False, type=click.Path(exists=True))#, help="directory of source files")
 @click.pass_context
-def cli(ctx):
+def cli(ctx):#, debug, source):
     """makebook is a Python package that turns notebooks into books"""
     ctx.ensure_object(dict)
+    ctx.obj['DEBUG'] = debug
+    ctx.obj['SOURCE_DIR'] = source
 
 
 build_help = "Run the build tool to convert a directory of notebooks to a .tex file"
@@ -88,6 +104,7 @@ source_directory_help = "The directory that contains the source notebooks"
 @cli.command(help=build_help)
 @click.pass_context
 def build(ctx):
+    # ctx.obj['DEBUG']  # grabe the DEBUG object from the ctx context
     click.echo("building from source...")
     source_dir = Path(Path.cwd(), "notebooks")
     out_dir = Path(Path.cwd(), "out")
