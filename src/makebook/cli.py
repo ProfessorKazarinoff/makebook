@@ -39,7 +39,7 @@ config_help = "Creates a makebook config file called makebook-config.py"
 version_help = "Prints out the makebook version number."
 
 
-@click.group()
+@click.group(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--version",
     "-v",
@@ -58,10 +58,26 @@ version_help = "Prints out the makebook version number."
     expose_value=False,
     is_eager=True,
 )
+# @click.argument(
+#     "src",
+#     nargs=-1,
+#     type=click.Path(
+#         exists=True, file_okay=True, dir_okay=True, readable=True, allow_dash=True
+#     ),
+#     is_eager=True,
+# )
+# @click.option(
+#     "--config",
+#     type=click.Path(
+#         exists=False, file_okay=True, dir_okay=False, readable=True, allow_dash=False
+#     ),
+#     is_eager=True,
+#     callback=read_pyproject_toml,
+#     help="use specified configuration file",
+# )
 @click.pass_context
 def cli(ctx):
-    # ensure that ctx.obj exists and is a dict (in case `cli()` is called
-    # by means other than the `if` block below
+    """makebook is a Python package that turns notebooks into books"""
     ctx.ensure_object(dict)
 
 
