@@ -38,8 +38,5 @@ setup(
     package_dir={"": "src"},
     python_requires=">=3.6",
     install_requires=["Click"],
-    entry_points="""
-        [console_scripts]
-        makebook=makebook.cli:cli
-    """,
+    entry_points={"console_scripts": ["makebook=makebook.cli:cli"]},
 )

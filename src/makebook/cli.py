@@ -58,10 +58,100 @@ version_help = "Prints out the makebook version number."
     expose_value=False,
     is_eager=True,
 )
-# @click.argument('-s','--source','source',
-#     help="source directory",
+@click.pass_context
+def cli(ctx):  # , debug, source):
+    """
+    Welcome to Makebook!
+    
+    Makebook is a Python package that turns notebooks into books
+    """
+    ctx.ensure_object(dict)
+    # ctx.obj['SOURCE_DIR'] = source
+
+
+build_help = "Run the build tool to convert a directory of notebooks to a .tex file"
+source_directory_help = "The directory that contains the source notebooks"
+
+
+@cli.command(help=build_help)
+@click.option(
+    "-s",
+    "--source",
+    "source",
+    nargs=1,
+    type=click.Path(
+        exists=True, file_okay=True, dir_okay=True, readable=True, allow_dash=True
+    ),
+    help="input directory or file",
+    show_default=True,
+    required=False,
+    default=Path(Path.cwd(), "notebooks"),
+)
+@click.option(
+    "-o",
+    "--output-directory",
+    "output_dir",
+    nargs=1,
+    type=click.Path(
+        exists=False, file_okay=False, dir_okay=True, readable=False, allow_dash=True
+    ),
+    help="output directory for generated file",
+    show_default=True,
+    required=False,
+    default=Path(Path.cwd(), "output"),
+)
+# @click.option(
+#     "-f","--file-name", "output_file_name",
+#     nargs=1,
+#     type=str,
+#     help="generated file name",
+#     show_default = True,
 #     required = False,
-#     type=click.Path(exists=True))
+#     default = "output.tex"
+# )
+@click.option(
+    "-c",
+    "--config",
+    "config_file_path",
+    nargs=1,
+    type=click.Path(
+        exists=False, file_okay=True, dir_okay=False, readable=True, allow_dash=True
+    ),
+    help="config file path",
+    show_default=True,
+    required=False,
+    default=Path(Path.cwd(), "makebook-config.py"),
+)
+@click.option(
+    "-t",
+    "--template",
+    "template_file_path",
+    nargs=1,
+    type=click.Path(
+        exists=True, file_okay=True, dir_okay=False, readable=True, allow_dash=True
+    ),
+    help="template file path",
+    show_default=True,
+    required=False,
+    default=Path(Path.cwd(), "templates", "book37.tplx"),
+)
+# @click.option(
+#     "-i","--include", "include_file_paths",
+#     nargs=1,   #TODO: see if this option can accept more than two files
+#     type=click.Path(
+#         exists=True, file_okay=True, dir_okay=True, readable=True, allow_dash=True
+#     ),
+#     help="files and directories to copy into output dir",
+#     required = False)
+# @click.option(
+#     "-e","--exclude", "exclude_file_paths",
+#     nargs=1,   #TODO: see if this option can accept more than one file
+#     type=click.Path(
+#         exists=True, file_okay=True, dir_okay=True, readable=True, allow_dash=True
+#     ),
+#     help="files and directories in source to ignore when building the book",
+#     required = False)
+#
 # options to include:
 # -c --config config file path
 # -s --source source dir path
@@ -71,99 +161,27 @@ version_help = "Prints out the makebook version number."
 # -i --include list of file paths to include in the output dir
 # -e --exclude list of file paths to exclude from the source dir
 @click.pass_context
-def cli(ctx):#, debug, source):
-    """makebook is a Python package that turns notebooks into books"""
-    ctx.ensure_object(dict)
-    #ctx.obj['SOURCE_DIR'] = source
-
-
-build_help = "Run the build tool to convert a directory of notebooks to a .tex file"
-source_directory_help = "The directory that contains the source notebooks"
-
-
-@cli.command(help=build_help)
-@click.option(
-    "-s","--source", "source",
-    nargs=1,
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=True, readable=True, allow_dash=True
-    ),
-    help="input directory or file",
-    show_default = True,
-    required = False,
-    default = Path(Path.cwd(),"notebooks")
-)
-@click.option(
-    "-o","--output-directory", "output_dir",
-    nargs=1,
-    type=click.Path(
-        exists=False, file_okay=False, dir_okay=True, readable=False, allow_dash=True
-    ),
-    help="output directory for generated file",
-    show_default = True,
-    required = False,
-    default = Path(Path.cwd(),"output")
-)
-@click.option(
-    "-f","--file-name", "output_file_name",
-    nargs=1,
-    type=click.File('wb'),
-    help="generated file name",
-    show_default = True,
-    required = False,
-    default = "output.tex"
-)
-@click.option(
-    "-c","--config", "config_file_path",
-    nargs=1,
-    type=click.Path(
-        exists=False, file_okay=True, dir_okay=False, readable=True, allow_dash=True
-    ),
-    help="config file path",
-    show_default = True,
-    required = False,
-    default = Path(Path.cwd(),'makebook-config.py'),
-)
-@click.option(
-    "-t","--template", "template_file_path",
-    nargs=1,
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=False, readable=True, allow_dash=True
-    ),
-    help="template file path",
-    show_default = True,
-    required = False,
-    default = Path(Path.cwd(),'templates','book37.tplx'),
-)
-@click.option(
-    "-i","--include", "include_file_paths",
-    nargs=1,   #TODO: see if this option can accept more than two files
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=True, readable=True, allow_dash=True
-    ),
-    help="files and directories to copy into output dir",
-    required = False)
-@click.option(
-    "-e","--exclude", "exclude_file_paths",
-    nargs=1,   #TODO: see if this option can accept more than one file
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=True, readable=True, allow_dash=True
-    ),
-    help="files and directories in source to ignore when building the book",
-    required = False)
-@click.pass_context
-def build(ctx, source, output_dir, output_file_name, config_file_path, template_file_path, include_file_paths,exclude_file_paths):
+def build(
+    ctx,
+    source,
+    output_dir,
+    # output_file_name):
+    config_file_path,
+    template_file_path,
+):
+    # include_file_paths):#,exclude_file_paths):
     """build book from source directory"""
-    # ctx.obj['DEBUG']  # grabe the DEBUG object from the ctx context
     click.echo("building from source...")
     source_dir = Path(Path.cwd(), source)
     out_dir = Path(Path.cwd(), output_dir)
     click.echo(f"source directry: {str(source_dir)}")
     click.echo(f"output directory: {str(out_dir)}")
-    click.echo(f"output filename: {str(output_file_name)}")
-    #click.echo(f"using config file: {str(config_file_path)}")
+    click.echo(f"config file: {str(config_file_path)}")
+    # click.echo(f"using config file: {str(config_file_path)}")
     click.echo(f"using template: {str(template_file_path)}")
-    #build_tex()  # args(input_dir=None, output_dir=None, output_file_stem=None, template_file_path=)
+    build_tex(
+        template_file_path=template_file_path
+    )  # args(input_dir=None, output_dir=None, output_file_stem=None, template_file_path=)
 
 
 if __name__ == "__main__":

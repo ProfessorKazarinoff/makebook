@@ -23,9 +23,7 @@ def build_tex(
     if not output_dir:
         output_dir = Path(Path.cwd(), "out")
     if not template_file_path:
-        template_file_path = Path(
-            Path.cwd(), "conversion_tools", "templates", "book37.tplx"
-        )
+        template_file_path = Path(Path.cwd(), "templates", "book37.tplx")
     if not output_file_stem:
         output_file_stem = "output"
 

@@ -7,8 +7,6 @@ from datetime import datetime
 def test_get_version():
     v = get_version()
     y_str = str(datetime.today().year)
-    m_str = str(datetime.today().month)
+    assert type(v) == type("2019.06.06")
     assert v.startswith(y_str)
-    assert m_str in v
     assert v.split(".")[0] == y_str
-    assert v.split(".")[1] == m_str

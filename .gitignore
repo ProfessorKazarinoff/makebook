@@ -123,6 +123,8 @@ makebook-config.py
 
 notebooks/
 out/
+templates/
+output/
 
 ## anything that LaTeX compilers spit out
 
