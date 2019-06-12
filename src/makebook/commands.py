@@ -32,3 +32,8 @@ OUT_IMAGES_DIR = ""
 def write_config(base_dir):
     config_path = os.path.join(base_dir, "makebook-config.py")
     io.open(config_path, "w", encoding="utf-8").write(config_text)
+
+
+def create_book(book_name):
+    """function creates the skelton directory structure for make a new book and config file"""
+    pass

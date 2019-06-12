@@ -5,7 +5,7 @@ from pathlib import Path
 import click
 
 from .utils import get_version
-from .commands import write_config
+from .commands import write_config, create_book
 from .runners import build_tex
 
 
@@ -182,6 +182,28 @@ def build(
     build_tex(
         template_file_path=template_file_path
     )  # args(input_dir=None, output_dir=None, output_file_stem=None, template_file_path=)
+
+
+create_help = "create a demo book and associated config file"
+
+
+@cli.command(help=create_help)
+@click.option(
+    "-n",
+    "--name",
+    "name",
+    nargs=1,
+    type=str,
+    help="name for new book directory and book title",
+    show_default=True,
+    required=False,
+    default="MyBook",
+)
+@click.pass_context
+def create(ctx, name):
+    """create a new book and config file"""
+    click.echo(f"Creating a new book called {name}")
+    create_book(name)
 
 
 if __name__ == "__main__":

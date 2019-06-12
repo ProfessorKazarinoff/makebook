@@ -1,6 +1,6 @@
 # test_utils.py
 
-#from makebook import copy_all_images_to_dir, export_tex
+# from makebook import copy_all_images_to_dir, export_tex
 
 
 def test_copy_all_images_to_dir():

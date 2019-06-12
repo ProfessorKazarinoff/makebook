@@ -63,6 +63,20 @@ def test_cli_build_help():
     assert result.exit_code == 0
 
 
+def test_cli_create():
+    runner = CliRunner()
+    result = runner.invoke(cli, ["create"])
+    assert "Creating a new book called" in result.output
+    assert result.exit_code == 0
+
+
+def test_cli_create_name():
+    runner = CliRunner()
+    result = runner.invoke(cli, ["create", "-n", "my_title"])
+    assert "Creating a new book called my_title" in result.output
+    assert result.exit_code == 0
+
+
 @pytest.fixture()
 def test_cli_generate_config(tempdir):
     runner = CliRunner()
