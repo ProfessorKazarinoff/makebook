@@ -39,4 +39,4 @@ Makebook offers the following cli commands
 
 ## Proposed architecture
 
-![flow chart](docs/images/flow_chart.svg)
+![flow chart](docs/images/flow_chart2.svg)
