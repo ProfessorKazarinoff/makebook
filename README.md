@@ -1,4 +1,4 @@
-# !! Under Construction !! Not Ready for Use !!
+# !! Under Construction !! Not Ready for Use !! Hacking together a semi-workable version
 
 # Welcome to the Makebook Documentation 
  
